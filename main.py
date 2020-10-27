@@ -10,6 +10,17 @@ from selenium.webdriver.firefox.options import Options
 import subprocess
 import os
 
+def excel_export(Path):
+    #adds extra row - possible delete in future
+    new_row = {'date': ' ', 'url': ' ', 'title': ' ', 'price': ' '}
+    tracker_log_appended = tracker_log.append(new_row, ignore_index=True)
+
+    if os.path.isfile(Path) and os.access(Path, os.R_OK):
+        tracker_log_appended.to_csv(Path, mode='a', index=False, header=None)
+    else:
+        tracker_log_appended.to_csv(Path, index=False)
+    return;
+
 #checks if firefox browser is installed - TODO
 #does it really need firefox to runn?
 #   -first part no. -CzMeanwell
@@ -71,7 +82,9 @@ for x, url in enumerate(prod_tracker_URLS):
     tracker_log = tracker_log.append(log)
 
 # save results to excel
-tracker_log.to_excel('results/MEAN_WELL_results_{}.xlsx'.format(now), index=False)
+Path='results/MEAN_WELL_results.csv'
+excel_export(Path)
+
 print('end of search for MEAN_WELL CZECH')
 
 #######################################################################################################################
@@ -128,7 +141,8 @@ for x, url in enumerate(prod_tracker_URLS):
 driver.quit()
 
 # save results to excel
-tracker_log.to_excel('results/GME_results_{}.xlsx'.format(now), index=False)
+Path='results/GME_results.csv'
+excel_export(Path)
 print('end of search for GME')
 
 #######################################################################################################################
