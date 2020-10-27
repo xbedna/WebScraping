@@ -1,4 +1,9 @@
 /venv
 *.log
 /.idea
+/build
+/dist
+/_pycache_
+*.spec
+/results
 

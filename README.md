@@ -11,5 +11,5 @@ To create venv needed to run the script you need to:
  to import all needed python libraries.
 
 In future there will be run-able file .exe to download prices on weakly basis...
-*        pyinstaller --onefile WebScraping.py
+*        pyinstaller -n WebScraping --onefile main.py
                                       

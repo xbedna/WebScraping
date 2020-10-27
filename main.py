@@ -11,6 +11,9 @@ import subprocess
 import os
 
 #checks if firefox browser is installed - TODO
+#does it really need firefox to runn?
+#   -first part no. -CzMeanwell
+#   -second part is resulting in error for PC without firefox. -GME.cz
 
 #try:
 #    subprocess.run("start chrom", shell=True)
@@ -25,11 +28,11 @@ HEADERS = ({'User-Agent':
             'Accept-Language': 'en-US, en;q=0.5'})
 
 # list of competitors webshop sites
-competitors= ('trackers/MEAN_WELL.csv','trackers/TME.csv','trackers/GME.csv')
+competitors = ('trackers/MEAN_WELL.csv', 'trackers/TME.csv', 'trackers/GME.csv')
 
 
 #######################################################################################################################
-###################################################    Meanwell     ####################################################
+###################################################    Meanwell     ###################################################
 #######################################################################################################################
 
 # imports a csv file with the url's to scrape
@@ -66,8 +69,6 @@ for x, url in enumerate(prod_tracker_URLS):
 
     # append result
     tracker_log = tracker_log.append(log)
-   # print('appended ' + prod_tracker.code[x] + '\n' + title + '\n\n')
-
 
 # save results to excel
 tracker_log.to_excel('results/MEAN_WELL_results_{}.xlsx'.format(now), index=False)
@@ -110,7 +111,7 @@ for x, url in enumerate(prod_tracker_URLS):
     GME_price = soup.find_all('span', class_='price col col-6')[-1].text
     GME_price = float(GME_price.replace('\xa0', '').replace('Kč', ''))
 
-    #DPH convenciton
+    #DPH coversion
     GME_price=round(GME_price*0.79,2)
     print(GME_price)
 
@@ -122,7 +123,6 @@ for x, url in enumerate(prod_tracker_URLS):
 
     # append result
     tracker_log = tracker_log.append(log)
-   # print('appended ' + prod_tracker.code[x] + '\n' + title + '\n\n')
 
 #kill driver
 driver.quit()
