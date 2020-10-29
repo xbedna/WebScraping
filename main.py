@@ -19,7 +19,14 @@ def excel_export(Path):
         tracker_log_appended.to_csv(Path, mode='a', index=False, header=None)
     else:
         tracker_log_appended.to_csv(Path, index=False)
+
+    #copy results from CVS to EXCEL format
+    read_file = pd.read_csv(Path)
+    path_excel=Path.split('.')[0]+r'.xlsx'
+    print(path_excel)
+    read_file.to_excel(path_excel, index=None, header=True)
     return;
+
 
 #checks if firefox browser is installed - TODO
 #does it really need firefox to runn?
